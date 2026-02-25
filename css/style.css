@@ -85,11 +85,53 @@ main {
 }
 
 .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 2.5rem;
+    border-radius: 16px;
+    background-color: #04070f;
+    background-image: radial-gradient(circle at 25% 15%, rgba(59, 130, 246, 0.16), transparent 35%);
+    color: #f9fafb;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     margin-bottom: 3rem;
 }
 
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(900px) rotateX(34deg) scale(1.18);
+    transform-origin: top center;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)),
+        linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+        linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16));
+    background-size: 44px 44px, 36px 36px, 52px 52px;
+    background-position: 18% 30%, 74% 42%, 36% 82%;
+    background-repeat: no-repeat;
+    opacity: 0.48;
+    pointer-events: none;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
 .kicker {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -104,7 +146,7 @@ h1 {
 
 .lead {
     max-width: 60ch;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .cta-row {
@@ -126,6 +168,24 @@ h1 {
     background: var(--text);
     color: #fff;
     border-color: var(--text);
+}
+
+.hero .btn {
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #f9fafb;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.hero .btn-primary {
+    background: #f9fafb;
+    color: #0f172a;
+    border-color: #f9fafb;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero::before {
+        transform: none;
+    }
 }
 
 .section {
@@ -191,6 +251,19 @@ h1 {
 }
 
 @media (max-width: 720px) {
+    .hero {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .hero::before {
+        background-size: 30px 30px;
+    }
+
+    .hero::after {
+        opacity: 0.36;
+    }
+
     .grid-2 {
         grid-template-columns: 1fr;
     }
